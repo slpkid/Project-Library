@@ -14,6 +14,7 @@ function Book(title, author, pages, read) {
 
 const theHobbit = new Book('The Hobbit', 'JRR Tolkien', '300', 'false');
 const fahrenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '281', 'true');
+const shadesOfGray = new Book('Shades of Gray', 'Jasper Fforde', '1', 'false');
 
 // function addBookToLibrary() {
     // Run Book function using text input info.
@@ -31,6 +32,7 @@ const fahrenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '281', 'true');
 // }
 
 // function updateLibrary() {
+    //check to see if library has contents
     //delete all visual elements from current library
     //reference const myLibrary to regenerate visual library contents
     //or
