@@ -13,9 +13,9 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     if (addReadStatus.checked) {
-        this.read = true
+        this.read = "Read"
     } else {
-        this.read = false
+        this.read = "Unread"
     }
 }
 
@@ -47,7 +47,7 @@ myLibrary.push(shadesOfGray)
 function addBookToLibrary(bookObj) {
     // create div with text elements, remove button, and a checkbox inside.
     const para = document.createElement("li");
-    const node = document.createTextNode(bookObj.title + bookObj.author + bookObj.pages + bookObj.read);
+    const node = document.createTextNode(bookObj.title + " by " + bookObj.author + ". " + bookObj.pages + " pages. " + bookObj.read);
     para.appendChild(node);
     bookList.appendChild(para);
     // fill text elements in with values title,author, pages
