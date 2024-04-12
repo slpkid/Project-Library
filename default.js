@@ -40,6 +40,7 @@ function addBookToLibrary(bookObj) {
     const arrayNum = `num${myLibrary.length}`;
     list.appendChild(node);
     list.setAttribute("class", arrayNum);
+    list.style.backgroundColor = `rgb(${randomColor()})`;
     bookList.appendChild(list);
 
     //create delete Button
@@ -75,14 +76,13 @@ function addBookToLibrary(bookObj) {
 // }
 
 function randomColor() {
+    // take 3 random num generators
     let r = Math.round(Math.random()*(255 - 0) + 0)
     let g = Math.round(Math.random()*(255 - 0) + 0)
     let b = Math.round(Math.random()*(255 - 0) + 0)
-    return (`${r}, `+`${g}, `+`${b}`);
-}
-    // function random num
-    // take 3 random num generators
     // create String with the three numbers (xxx, xxx, xxx)
     // return string
+    return (`${r}, `+`${g}, `+`${b}`);
+}
 
 // submit event listener
