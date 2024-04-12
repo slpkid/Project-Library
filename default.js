@@ -17,6 +17,7 @@ function Book(title, author, pages, read) {
     } else {
         this.read = "Unread"
     }
+    this.rgb = `rgb(${randomColor()})`;
 }
 
 addBookButton.addEventListener("click", function(e) {
@@ -36,11 +37,11 @@ function addBookToLibrary(bookObj) {
     // create div with text elements, blurb, remove button.
     const list = document.createElement("li");
     const node = document.createTextNode(bookObj.title + " by " + bookObj.author + ". " + bookObj.pages + " pages. " + bookObj.read);
-    const arrayNumLength = myLibrary.length;
     const arrayNum = `num${myLibrary.length}`;
     list.appendChild(node);
     list.setAttribute("class", arrayNum);
-    list.style.backgroundColor = `rgb(${randomColor()})`;
+    // Give each new book a random color...
+    list.style.backgroundColor = bookObj.rgb;
     bookList.appendChild(list);
 
     //create delete Button
@@ -58,8 +59,6 @@ function addBookToLibrary(bookObj) {
             myLibrary.pop();
         }
     });
-
-    //reinitialize input fields
     addTitle.value = '';
     addAuthor.value = '';
     addPageCount.value = '';
@@ -85,4 +84,5 @@ function randomColor() {
     return (`${r}, `+`${g}, `+`${b}`);
 }
 
-// submit event listener
+// Instead of creating elements through the addBookToLibrary function, create an updateLibrary 
+// function that loops through myLibrary and renders each of the items whenever there's an update (addition or deletion to list)
