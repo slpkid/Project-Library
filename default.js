@@ -74,7 +74,12 @@ function addBookToLibrary(bookObj) {
     //  delete
 // }
 
-// function randomColor
+function randomColor() {
+    let r = Math.round(Math.random()*(255 - 0) + 0)
+    let g = Math.round(Math.random()*(255 - 0) + 0)
+    let b = Math.round(Math.random()*(255 - 0) + 0)
+    return (`${r}, `+`${g}, `+`${b}`);
+}
     // function random num
     // take 3 random num generators
     // create String with the three numbers (xxx, xxx, xxx)
