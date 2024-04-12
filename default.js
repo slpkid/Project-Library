@@ -34,13 +34,13 @@ addBookButton.addEventListener("click", function(e) {
 
 // placeholder books
 
-const theHobbit = new Book('The Hobbit', 'JRR Tolki en', '300', 'false');
-const fahrenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '281', 'true');
-const shadesOfGray = new Book('Shades of Gray', 'Jasper Fforde', '1', 'false');
+// const theHobbit = new Book('The Hobbit', 'JRR Tolki en', '300', 'false');
+// const fahrenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '281', 'true');
+// const shadesOfGray = new Book('Shades of Gray', 'Jasper Fforde', '1', 'false');
 
-myLibrary.push(theHobbit);
-myLibrary.push(fahrenheit451)
-myLibrary.push(shadesOfGray)
+// myLibrary.push(theHobbit);
+// myLibrary.push(fahrenheit451)
+// myLibrary.push(shadesOfGray)
 
 // end placeholder books
 
@@ -50,23 +50,29 @@ function deleteItem(e) {
 
 function addBookToLibrary(bookObj) {
     // create div with text elements, blurb, remove button.
-    const arrayNum = myLibrary.length;
     const list = document.createElement("li");
     const node = document.createTextNode(bookObj.title + " by " + bookObj.author + ". " + bookObj.pages + " pages. " + bookObj.read);
-    const eek = `num${arrayNum}`
+    const arrayNumLength = myLibrary.length;
+    const arrayNum = `num${myLibrary.length}`;
     list.appendChild(node);
-    list.setAttribute("class", `num${arrayNum}`)
+    list.setAttribute("class", arrayNum);
     bookList.appendChild(list);
+
+    //create delete Button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "delete";
     list.appendChild(deleteButton);
     deleteButton.addEventListener("click", (e) => {
         // removes the list element with the corresponding class
-        list.closest(`.${eek}`).remove();
+        list.closest(`.${arrayNum}`).remove();
         // remove item from array
-        myLibrary.push(myLibrary.splice(arrayNum-1,1)[0]);
+        myLibrary.push(myLibrary.splice(arrayNumLength-1,1)[0]); //if removing item from middle of list then removing last item, creates an undefined entry. not sure why this is happening but here's a stupid fix i guess...
         myLibrary.pop();
+        if (myLibrary[arrayNumLength-1]) {
+            myLibrary.pop();
+        }
     });
+
     //reinitialize input fields
     addTitle.value = '';
     addAuthor.value = '';
