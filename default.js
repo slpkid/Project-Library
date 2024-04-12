@@ -32,22 +32,6 @@ addBookButton.addEventListener("click", function(e) {
     addBookToLibrary(newBook)
 });
 
-// placeholder books
-
-// const theHobbit = new Book('The Hobbit', 'JRR Tolki en', '300', 'false');
-// const fahrenheit451 = new Book('Fahrenheit 451', 'Ray Bradbury', '281', 'true');
-// const shadesOfGray = new Book('Shades of Gray', 'Jasper Fforde', '1', 'false');
-
-// myLibrary.push(theHobbit);
-// myLibrary.push(fahrenheit451)
-// myLibrary.push(shadesOfGray)
-
-// end placeholder books
-
-function deleteItem(e) {
-    e.parentElement.remove();
-}
-
 function addBookToLibrary(bookObj) {
     // create div with text elements, blurb, remove button.
     const list = document.createElement("li");
@@ -81,14 +65,6 @@ function addBookToLibrary(bookObj) {
     addTitle.focus();
     return
 }
-
-// function removeBook(book) {
-    //  check current book's position in array...
-    //  delete book from array
-    //  run updateLibrary function
-    //  or delete the input book from the DOM.
-    //  ==> loop through DOM with input and iteratively remove elements
-// }
 
 // function updateLibrary() {
     //  check to see if library has contents
