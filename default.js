@@ -63,12 +63,13 @@ function addBookToLibrary(bookObj) {
     deleteButton.textContent = "delete";
     list.appendChild(deleteButton);
     deleteButton.addEventListener("click", (e) => {
+        const removeTarget = myLibrary.length-1;
         // removes the list element with the corresponding class
         list.closest(`.${arrayNum}`).remove();
         // remove item from array
-        myLibrary.push(myLibrary.splice(arrayNumLength-1,1)[0]); //if removing item from middle of list then removing last item, creates an undefined entry. not sure why this is happening but here's a stupid fix i guess...
+        myLibrary.push(myLibrary.splice(removeTarget,1)[0]); //if removing item from middle of list then removing last item, creates an undefined entry. not sure why this is happening but here's a stupid fix i guess...
         myLibrary.pop();
-        if (myLibrary[arrayNumLength-1]) {
+        if (myLibrary[removeTarget]) {
             myLibrary.pop();
         }
     });
