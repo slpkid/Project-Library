@@ -17,6 +17,7 @@ function Book(title, author, pages, read) {
     } else {
         this.read = "Unread"
     }
+    this.info = this.title + " by " + this.author + ". " + this.pages + " pages. " + this.read;
     this.rgb = `rgb(${randomColor()})`;
 }
 
@@ -36,7 +37,7 @@ addBookButton.addEventListener("click", function(e) {
 function addBookToLibrary(bookObj) {
     // create div with text elements, blurb, remove button.
     const list = document.createElement("li");
-    const node = document.createTextNode(bookObj.title + " by " + bookObj.author + ". " + bookObj.pages + " pages. " + bookObj.read);
+    const node = document.createTextNode(bookObj.title);
     const arrayNum = `num${myLibrary.length}`;
     list.appendChild(node);
     list.setAttribute("class", arrayNum);
@@ -68,7 +69,7 @@ function addBookToLibrary(bookObj) {
 
     //create dialogue box...
     const dialogue = document.createElement("dialog")
-    dialogue.textContent = `FUCK ${bookObj.rgb}`;
+    dialogue.textContent = bookObj.info;
     list.append(dialogue);
 
     //create close button...
@@ -88,6 +89,7 @@ function addBookToLibrary(bookObj) {
     addTitle.value = '';
     addAuthor.value = '';
     addPageCount.value = '';
+    addReadStatus.checked = false;
     addTitle.focus();
     return
 }
