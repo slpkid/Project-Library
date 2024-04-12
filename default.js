@@ -48,6 +48,7 @@ function addBookToLibrary(bookObj) {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "delete";
     list.appendChild(deleteButton);
+
     deleteButton.addEventListener("click", (e) => {
         const removeTarget = myLibrary.length-1;
         // removes the list element with the corresponding class
@@ -59,6 +60,31 @@ function addBookToLibrary(bookObj) {
             myLibrary.pop();
         }
     });
+
+    //create dialogue button
+    const dialogueButton = document.createElement("button");
+    dialogueButton.textContent = "open";
+    list.append(dialogueButton);
+
+    //create dialogue box...
+    const dialogue = document.createElement("dialog")
+    dialogue.textContent = `FUCK ${bookObj.rgb}`;
+    list.append(dialogue);
+
+    //create close button...
+    const dialogueCloseButton = document.createElement("button");
+    dialogueCloseButton.textContent = "close";
+    dialogue.append(dialogueCloseButton);
+
+    //dialogue event listeners 
+    dialogueButton.addEventListener("click",(e) => {
+        dialogue.showModal();
+    });
+
+    dialogueCloseButton.addEventListener("click", (e) => {
+        dialogue.close();
+    });
+
     addTitle.value = '';
     addAuthor.value = '';
     addPageCount.value = '';
