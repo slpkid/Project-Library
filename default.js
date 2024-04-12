@@ -41,6 +41,7 @@ function addBookToLibrary(bookObj) {
     const arrayNum = `num${myLibrary.length}`;
     list.appendChild(node);
     list.setAttribute("class", arrayNum);
+
     // Give each new book a random color...
     list.style.backgroundColor = bookObj.rgb;
     bookList.appendChild(list);
@@ -70,6 +71,7 @@ function addBookToLibrary(bookObj) {
     //create dialogue box...
     const dialogue = document.createElement("dialog")
     dialogue.textContent = bookObj.info;
+    dialogue.style.border = `10px solid ${bookObj.rgb}`;
     list.append(dialogue);
 
     //create close button...
