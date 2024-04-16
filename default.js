@@ -47,11 +47,39 @@ function addBookToLibrary(bookObj) {
     list.style.backgroundColor = bookObj.rgb;
     bookList.appendChild(list);
 
+    
+    //create dialogue button
+    const dialogueButton = document.createElement("button");
+    dialogueButton.textContent = "open";
+    list.append(dialogueButton);
+    
+    //create dialogue box...
+    const dialogue = document.createElement("dialog");
+    dialogue.style.border = `5px solid ${bookObj.rgb}`;
+    list.append(dialogue);
+    
+    //create info blurb
+    const bookInfo = document.createElement("p");
+    bookInfo.textContent = bookObj.info;
+    bookInfo.setAttribute("class", "book-info");
+    dialogue.append(bookInfo);
+    
+    //create lorem ipsum text on right hand side of page
+    const blurb = document.createElement("p");
+    blurb.textContent = bookObj.lorem;
+    blurb.setAttribute("class", "book-blurb")
+    dialogue.append(blurb);
+    
+    //create close button...
+    const dialogueCloseButton = document.createElement("button");
+    dialogueCloseButton.textContent = "X";
+    dialogue.append(dialogueCloseButton);
+    
     //create delete Button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "delete";
     list.appendChild(deleteButton);
-
+    
     deleteButton.addEventListener("click", (e) => {
         const removeTarget = myLibrary.length-1;
         // removes the list element with the corresponding class
@@ -63,43 +91,16 @@ function addBookToLibrary(bookObj) {
             myLibrary.pop();
         }
     });
-
-    //create dialogue button
-    const dialogueButton = document.createElement("button");
-    dialogueButton.textContent = "open";
-    list.append(dialogueButton);
-
-    //create dialogue box...
-    const dialogue = document.createElement("dialog");
-    dialogue.style.border = `1px solid ${bookObj.rgb}`;
-    list.append(dialogue);
     
-    //create info blurb
-    const bookInfo = document.createElement("p");
-    bookInfo.textContent = bookObj.info;
-    bookInfo.setAttribute("class", "book-info");
-    dialogue.append(bookInfo);
-
-    //create lorem ipsum text on right hand side of page
-    const blurb = document.createElement("p");
-    blurb.textContent = bookObj.lorem;
-    blurb.setAttribute("class", "book-blurb")
-    dialogue.append(blurb);
-
-    //create close button...
-    const dialogueCloseButton = document.createElement("button");
-    dialogueCloseButton.textContent = "close";
-    dialogue.append(dialogueCloseButton);
-
     //dialogue event listeners 
     dialogueButton.addEventListener("click",(e) => {
         dialogue.showModal();
     });
-
+    
     dialogueCloseButton.addEventListener("click", (e) => {
         dialogue.close();
     });
-
+    
     addTitle.value = '';
     addAuthor.value = '';
     addPageCount.value = '';
@@ -114,8 +115,8 @@ function addBookToLibrary(bookObj) {
     //  reference const myLibrary to regenerate visual library contents
     //  or
     //  delete
-// }
-
+    // }
+    
 function randomColor() {
     // take 3 random num generators
     let r = Math.round(Math.random()*(255 - 0) + 0)
