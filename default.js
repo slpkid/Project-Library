@@ -47,7 +47,6 @@ function addBookToLibrary(bookObj) {
     list.style.backgroundColor = bookObj.rgb;
     bookList.appendChild(list);
 
-    
     //create dialogue button
     const dialogueButton = document.createElement("button");
     dialogueButton.textContent = "open";
@@ -58,22 +57,26 @@ function addBookToLibrary(bookObj) {
     dialogue.style.border = `5px solid ${bookObj.rgb}`;
     list.append(dialogue);
     
+    //create dialogue div
+    const dialogueDiv = document.createElement("div");
+    dialogue.append(dialogueDiv);
+    
     //create info blurb
     const bookInfo = document.createElement("p");
     bookInfo.textContent = bookObj.info;
     bookInfo.setAttribute("class", "book-info");
-    dialogue.append(bookInfo);
+    dialogueDiv.append(bookInfo);
     
     //create lorem ipsum text on right hand side of page
     const blurb = document.createElement("p");
     blurb.textContent = bookObj.lorem;
     blurb.setAttribute("class", "book-blurb")
-    dialogue.append(blurb);
+    dialogueDiv.append(blurb);
     
     //create close button...
     const dialogueCloseButton = document.createElement("button");
     dialogueCloseButton.textContent = "X";
-    dialogue.append(dialogueCloseButton);
+    dialogueDiv.append(dialogueCloseButton);
     
     //create delete Button
     const deleteButton = document.createElement("button");
@@ -91,7 +94,7 @@ function addBookToLibrary(bookObj) {
             myLibrary.pop();
         }
     });
-    
+
     //dialogue event listeners 
     dialogueButton.addEventListener("click",(e) => {
         dialogue.showModal();
@@ -100,6 +103,11 @@ function addBookToLibrary(bookObj) {
     dialogueCloseButton.addEventListener("click", (e) => {
         dialogue.close();
     });
+    dialogue.addEventListener("click", (e) => {
+        if(e.target === dialogue) {
+            dialogue.close();
+        }
+    })
     
     addTitle.value = '';
     addAuthor.value = '';

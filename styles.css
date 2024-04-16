@@ -18,6 +18,8 @@ dialog[open] {
     background-repeat: no-repeat;
     background-size:100%;
     background-color: transparent;
+}
+dialog div {
     display: grid; 
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
