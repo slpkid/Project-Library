@@ -19,6 +19,7 @@ function Book(title, author, pages, read) {
     }
     this.info = this.title + " by " + this.author + ". " + this.pages + " pages. " + this.read;
     this.rgb = `rgb(${randomColor()})`;
+    this.lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }
 
 addBookButton.addEventListener("click", function(e) {
@@ -69,10 +70,21 @@ function addBookToLibrary(bookObj) {
     list.append(dialogueButton);
 
     //create dialogue box...
-    const dialogue = document.createElement("dialog")
-    dialogue.textContent = bookObj.info;
-    dialogue.style.border = `10px solid ${bookObj.rgb}`;
+    const dialogue = document.createElement("dialog");
+    dialogue.style.border = `1px solid ${bookObj.rgb}`;
     list.append(dialogue);
+    
+    //create info blurb
+    const bookInfo = document.createElement("p");
+    bookInfo.textContent = bookObj.info;
+    bookInfo.setAttribute("class", "book-info");
+    dialogue.append(bookInfo);
+
+    //create lorem ipsum text on right hand side of page
+    const blurb = document.createElement("p");
+    blurb.textContent = bookObj.lorem;
+    blurb.setAttribute("class", "book-blurb")
+    dialogue.append(blurb);
 
     //create close button...
     const dialogueCloseButton = document.createElement("button");

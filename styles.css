@@ -6,3 +6,35 @@
     gap: 5px;
 }
 
+
+.book-pages {
+}
+
+/* setting the display reveals the dialog's contents for some reason... Jank is necessary */
+dialog[open] {
+    height: 500px;
+    width: 800px;
+    background-image: url("./images/open-book.svg");
+    background-repeat: no-repeat;
+    background-size:100%;
+    background-color: transparent;
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+dialog button {
+    grid-area: 1/2/1/2;
+    align-self:baseline;
+    justify-self: end;
+}
+
+.book-blurb {
+    grid-area: 1/2/2/3;
+}
+
+.book-info {
+    grid-area: 1/1/3/2;
+    align-self: center;
+    justify-self: center;
+}
