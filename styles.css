@@ -25,7 +25,7 @@ dialog div {
     grid-template-rows: 1fr 1fr;
 }
 
-dialog button {
+dialog .xButton {
     grid-area: 1/2/1/2;
     align-self:baseline;
     justify-self: end;

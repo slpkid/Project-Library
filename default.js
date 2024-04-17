@@ -5,8 +5,6 @@ const addPageCount = document.getElementById("pages")
 const addReadStatus = document.getElementById("read")
 const addBookButton = document.getElementById("add-book-button")
 const bookList = document.getElementById("book-list")
-//remove book button
-// removeBookButton = document.querySelector("")
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -17,7 +15,7 @@ function Book(title, author, pages, read) {
     } else {
         this.read = "Unread"
     }
-    this.info = this.title + " by " + this.author + ". " + this.pages + " pages. " + this.read;
+    this.info = this.title + " by " + this.author + ". " + this.pages + " pages.";
     this.rgb = `rgb(${randomColor()})`;
     this.lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 }
@@ -35,18 +33,26 @@ addBookButton.addEventListener("click", function(e) {
     addBookToLibrary(newBook)
 });
 
-function addBookToLibrary(bookObj) {
+
+function addBookToLibrary() {
+    //delete all elements in the library
+    while (bookList.firstChild) {
+            bookList.removeChild(bookList.firstChild);
+    };
+    let i = 0;
+    myLibrary.forEach((bookObj) => {
     // create div with text elements, blurb, remove button.
     const list = document.createElement("li");
     const node = document.createTextNode(bookObj.title);
-    const arrayNum = `num${myLibrary.length}`;
+    let arrayNum = `num${i}`;
+    let removeTarget = i;
     list.appendChild(node);
-    list.setAttribute("class", arrayNum);
-
+    list.setAttribute("class", `${arrayNum} library-node`);
+    
     // Give each new book a random color...
     list.style.backgroundColor = bookObj.rgb;
     bookList.appendChild(list);
-
+    
     //create dialogue button
     const dialogueButton = document.createElement("button");
     dialogueButton.textContent = "open";
@@ -67,6 +73,13 @@ function addBookToLibrary(bookObj) {
     bookInfo.setAttribute("class", "book-info");
     dialogueDiv.append(bookInfo);
     
+    //create read/unread button
+    const bookReadButton = document.createElement("button");
+    bookReadButton.textContent = bookObj.read;
+    bookReadButton.setAttribute("id",`${i}`)
+    dialogueDiv.append(bookReadButton);
+    
+    
     //create lorem ipsum text on right hand side of page
     const blurb = document.createElement("p");
     blurb.textContent = bookObj.lorem;
@@ -76,23 +89,35 @@ function addBookToLibrary(bookObj) {
     //create close button...
     const dialogueCloseButton = document.createElement("button");
     dialogueCloseButton.textContent = "X";
+    dialogueCloseButton.setAttribute("class", "xButton")
     dialogueDiv.append(dialogueCloseButton);
     
     //create delete Button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "delete";
+
     list.appendChild(deleteButton);
     
+    bookReadButton.addEventListener("click", (e) => {
+        if (myLibrary[bookReadButton.id].read === "Unread") {
+            bookReadButton.textContent = "Read";
+            myLibrary[bookReadButton.id].read = "Read";
+            return
+        }
+        if (myLibrary[bookReadButton.id].read === "Read") {
+            bookReadButton.textContent = "Unread";
+            myLibrary[bookReadButton.id].read = "Unread";
+            return
+        }
+    })
+
     deleteButton.addEventListener("click", (e) => {
-        const removeTarget = myLibrary.length-1;
         // removes the list element with the corresponding class
         list.closest(`.${arrayNum}`).remove();
         // remove item from array
-        myLibrary.push(myLibrary.splice(removeTarget,1)[0]); //if removing item from middle of list then removing last item, creates an undefined entry. not sure why this is happening but here's a stupid fix i guess...
+        myLibrary.push(myLibrary.splice(removeTarget, 1)[0]);
         myLibrary.pop();
-        if (myLibrary[removeTarget]) {
-            myLibrary.pop();
-        }
+        addBookToLibrary();
     });
 
     //dialogue event listeners 
@@ -103,11 +128,15 @@ function addBookToLibrary(bookObj) {
     dialogueCloseButton.addEventListener("click", (e) => {
         dialogue.close();
     });
+    //if a click is detected on the dialog element, close the modal. 
+    //any clicks on the nested div do not close it.
     dialogue.addEventListener("click", (e) => {
         if(e.target === dialogue) {
             dialogue.close();
         }
-    })
+    });
+    i++;
+});
     
     addTitle.value = '';
     addAuthor.value = '';
@@ -125,10 +154,10 @@ function addBookToLibrary(bookObj) {
     //  delete
     // }
     
-function randomColor() {
-    // take 3 random num generators
-    let r = Math.round(Math.random()*(255 - 0) + 0)
-    let g = Math.round(Math.random()*(255 - 0) + 0)
+    function randomColor() {
+        // take 3 random num generators
+        let r = Math.round(Math.random()*(255 - 0) + 0)
+        let g = Math.round(Math.random()*(255 - 0) + 0)
     let b = Math.round(Math.random()*(255 - 0) + 0)
     // create String with the three numbers (xxx, xxx, xxx)
     // return string
