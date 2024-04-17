@@ -53,3 +53,16 @@ dialog button:hover {
     align-self: center;
     justify-self: center;
 }
+
+#book-list {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 150px;
+    grid-auto-flow: column;
+    width: 100%;
+}
+
+#book-list li {
+    list-style: none;
+    text-align: center;
+}

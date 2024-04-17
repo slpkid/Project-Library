@@ -95,9 +95,9 @@ function addBookToLibrary() {
     //create delete Button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "delete";
-
     list.appendChild(deleteButton);
     
+    //Event Listeners...
     bookReadButton.addEventListener("click", (e) => {
         if (myLibrary[bookReadButton.id].read === "Unread") {
             bookReadButton.textContent = "Read";
@@ -110,7 +110,7 @@ function addBookToLibrary() {
             return
         }
     })
-
+    
     deleteButton.addEventListener("click", (e) => {
         // removes the list element with the corresponding class
         list.closest(`.${arrayNum}`).remove();
